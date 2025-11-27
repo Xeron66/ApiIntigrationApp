@@ -14,7 +14,17 @@ class ApiController extends StateNotifier <List<ApiModel>> {
       state = await _repo.fetchData();
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$e')));
+      }
+    }
+  }
+
+  Future<void> createData(BuildContext context,int userId, String title, String body) async {
+    try {
+      await _repo.createData(userId, title, body);
+    } catch (e) {
+      if(context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$e')));
       }
     }
   }
